@@ -11,7 +11,10 @@ class MyLineEdit(QLineEdit):
     def __init__(self):
         super().__init__()
         self.backspace_flag = False
+<<<<<<< HEAD
         self.con = sqlite3.connect("result.sqlite")
+=======
+>>>>>>> ae1333d (4)
 
     def event(self, event):
         if event.type() == QEvent.KeyPress and event.key() != Qt.Key_Backspace:
@@ -185,6 +188,13 @@ class Example(QWidget):
     def write_record(self, filename, wpm_value):
         with open(filename, "a") as record_file:
             record_file.write(str(wpm_value) + "\n")
+
+    def get_average_speed(self, filename):
+        con = sqlite3.connect("record.sql")
+        cur = con.cursor()
+        cur.execute(f"""insert into records(result) values('{str(wpm_value)}')""")
+        con.commit()
+        con.close()
 
     def get_average_speed(self, filename):
         average = 0
